@@ -20,11 +20,10 @@
             app:title="Navigation Drawer"
             app:titleTextColor="@color/cardview_light_background" />
 
-
-        <ListView
-            android:id="@+id/listViewAyah"
-            android:layout_width="380dp"
-            android:layout_height="649dp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewSurah"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/toolbar"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
@@ -38,7 +37,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt"
             tools:listitem="@layout/activity_custom_list_view_surah_name" />
 
     </RelativeLayout>
