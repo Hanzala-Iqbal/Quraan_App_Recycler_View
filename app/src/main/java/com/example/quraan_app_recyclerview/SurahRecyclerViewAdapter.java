@@ -71,9 +71,6 @@ public class SurahRecyclerViewAdapter extends RecyclerView.Adapter <SurahRecycle
             Intent intent = new Intent(context, ayahActivity.class);
             intent.putExtra("surahIndex",String.valueOf(ii));
             context.startActivity(intent);
-
         }
     }
-
-
 }

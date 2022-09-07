@@ -5,26 +5,33 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.database.SQLException;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ayahActivity extends AppCompatActivity {
-
+    RecyclerView recyclerViewAyah;
+    AyahRecyclerViewAdapter ayahRecyclerViewAdapter;
+    ArrayList<String> ayahArabic;
+    ArrayList<String> ayahUrdu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ayah);
-        ListView listViewAyah = findViewById(R.id.listViewSurah);
+        recyclerViewAyah = findViewById(R.id.recyclerViewAyah);
+        recyclerViewAyah.setHasFixedSize(true);
+        recyclerViewAyah.setLayoutManager(new LinearLayoutManager(this));
         Intent intent = getIntent();
         int index=Integer.parseInt(intent.getStringExtra("surahIndex"));
         Toast.makeText(this, "Index: " + index, Toast.LENGTH_SHORT).show();
@@ -92,8 +99,15 @@ public class ayahActivity extends AppCompatActivity {
             throw sqle;
         }
         db.DBAyahs(index);
-        CustomAdapterAyah customBaseAdapter = new CustomAdapterAyah(getApplicationContext(),db.getAyahsArabic(),db.getAyahsUrdu());
-        listViewAyah.setAdapter(customBaseAdapter);
+
+        ayahArabic = new ArrayList<>();
+        ayahUrdu = new ArrayList<>();
+
+        ayahArabic = db.getAyahsArabic();
+        ayahUrdu = db.getAyahsUrdu();
+
+        ayahRecyclerViewAdapter = new AyahRecyclerViewAdapter(this,ayahArabic,ayahUrdu);
+        recyclerViewAyah.setAdapter(ayahRecyclerViewAdapter);
 
     }
 

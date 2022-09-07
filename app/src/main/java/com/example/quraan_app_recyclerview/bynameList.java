@@ -79,8 +79,6 @@ public class bynameList extends AppCompatActivity{
             }
         });
 
-        TextView txt = (TextView) findViewById(R.id.txt);
-
         DBMain db;
         db = new DBMain(getApplicationContext());
 
